@@ -13,7 +13,7 @@ export default (startIndex = 0, number = 20) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const mock = []
-      const time = new Date()
+      const time = new Date().toLocaleString()
       for (let id = startIndex; id < number; id++) {
         mock.push({
           id,
