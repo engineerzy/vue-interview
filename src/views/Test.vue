@@ -13,20 +13,18 @@
 </template>
 
 <script>
-
 export default {
   name: 'test',
   data () {
     return {
-      dataList: [],
-      average: ''
+      dataList: this.$store.getters.getData,
+      average: this.$store.getters.getAverage
     }
   },
   computed: {
 
   },
   methods: {
-
     update () {
 
     }

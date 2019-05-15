@@ -12,6 +12,7 @@ export default new Vuex.Store({
   },
   getters: {
     getAverage: state => 0,
+
     getData: state => state.dataList
   },
   actions: {
@@ -19,5 +20,6 @@ export default new Vuex.Store({
       // TODO
       mockGenerator()
     }
+
   }
 })
