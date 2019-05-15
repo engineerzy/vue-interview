@@ -5,20 +5,36 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    dataList: []
+    dataList: [],
+    startIndex: 0,
+    number: 20
   },
   mutations: {
-
+    updateState (state, payload) {
+      if (!Array.isArray(payload) || !payload.length) return
+      state.dataList = state.dataList.concat(payload)
+      state.startIndex = state.dataList.length
+      state.number = state.startIndex + 20
+    }
   },
   getters: {
-    getAverage: state => 0,
-
+    getAverage: state => {
+      const sum = state.dataList.reduce((pre, cur) => (pre = cur.data + pre), 0)
+      const count = state.dataList.length
+      return count > 0 ? (sum / count).toFixed(2) : 0
+    },
     getData: state => state.dataList
   },
   actions: {
-    getDataCall (context) {
+    async getDataCall ({ state, commit }) {
       // TODO
-      mockGenerator()
+      const { startIndex, number } = state
+      try {
+        const mockData = await mockGenerator(startIndex, number)
+        commit('updateState', mockData)
+      } catch (error) {
+        this.$toast('出错了')
+      }
     }
 
   }
